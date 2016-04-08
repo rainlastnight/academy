@@ -2,6 +2,7 @@
 
 .DS_Store
 db.sqlite3
+sfox/settings/local.py
 
 __pycache__/
 *.py[cod]
