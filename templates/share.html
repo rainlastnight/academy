@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block styles %}
+
+<style>
+.featured-row-top {
+  border: none !important;
+}
+.footer-base {
+  display:none !important;
+}
+</style>
+
+{% endblock %}
+
+{% block jquery %}
+
+$signUpCount = {{ count }};
+
+function completeBlock(progressBarId) {
+$(progressBarId).css("width", "100%").attr("aria-valuenow", "100").text("Completed");
+};
+
+
+function setNewPerc(progressBarId, percentNum, newText){
+  $(progressBarId).css("width", percentNum + "%").attr("aria-valuenow", percentNum);
+
+  if (percentNum < 50) {
+    //$(progressBarId).text("My Custom text");
+    $(progressBarId).text(newText);
+  } else {
+    $(progressBarId).text(newText);
+  }
+
+};
+
+if ($signUpCount == 0){
+  
+} else if ($signUpCount > 0 && $signUpCount < 5) {
+  $newPercent = $signUpCount/5 * 100;
+  setNewPerc("#count5", $newPercent, "Number of Friends: " + $signUpCount);
+} else if ($signUpCount>=5 && $signUpCount < 15) {
+  completeBlock("#count5");
+  $newCount = $signUpCount - 5;
+  $newPercent = $newCount/(15-5) * 100;
+  setNewPerc("#count15", $newPercent, "Number of Friends: " + $signUpCount);
+} else if ($signUpCount >=15 && $signUpCount < 25) {
+  completeBlock("#count5");
+  completeBlock("#count15");
+  $newCount = $signUpCount - 15;
+  $newPercent = $newCount/(25-15) * 100;
+  setNewPerc("#count25", $newPercent, "Number of Friends: " + $signUpCount);
+
+} else if ($signUpCount >= 25 && $signUpCount < 50 ) {
+  completeBlock("#count5");
+  completeBlock("#count15");
+  completeBlock("#count25");
+
+  $newCount = $signUpCount - 25;
+  $newPercent = $newCount/(50-25) * 100;
+  setNewPerc("#count50", $newPercent, "Number of Friends: " + $signUpCount);
+
+
+} else {
+  completeBlock("#count5");
+  completeBlock("#count15");
+  completeBlock("#count25");
+  completeBlock("#count50");
+};
+
+{% endblock %}
+
+{% block content %}
+{% include "navbar.html" %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+      <div class="row">
+      <div class="col-md-6 pull-right" style="text-align: center;">
+        <i class="fa fa-paper-plane-o fa-5x"></i>
+        <h1>Yay! You're on the awesome list!</h1>
+        <p><b>So what to do now?</b></p> <p>If you look forward to Conversion Academy launch then you might know more people that would benefit from it. You can invite your friends and collegues through your unique link below and earn rewards on the day we go live.</p>
+        <div class="well" style="background-color: white;">{{ ref_url }}</div>
+        Share&nbsp;<br>
+        <i class="fa fa-hand-o-right fa-3x"></i>  
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ ref_url }}" target="_blank">
+        <i class="fa fa-facebook-square fa-3x" style="color: #3b5998;"></i></a>
+        <a href="https://twitter.com/home?status=Learn%20the%20Conversion%20Optimization%20Techniques%20-%20{{ ref_url }}%20%23ConversionAcademy" target="_blank">
+        <i class="fa fa-twitter-square fa-3x" style="color: #4099FF;"></i></a>
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ ref_url }}&title=Learn%20Conversion%20Optimization%20Techniques&summary=Learn%20Conversion%20Optimization%20Techniques&source={{ ref_url }}" target="_blank">
+        <i class="fa fa-linkedin-square fa-3x" style="color: #007bb6;"></i>
+        <a href="http://pinterest.com/pin/create/link/?url={{ ref_url }}" target="_blank">
+        <i class="fa fa-pinterest-square fa-3x" style="color: #C92228;"></i></a>
+        <a href="https://plus.google.com/share?url={{ ref_url }}" target="_blank">
+        <i class="fa fa-google-plus-square fa-3x" style="color: #D34836;"></i></a>
+        </div>
+        <div class="col-md-6 pull-left">
+        <img src="{% static 'img/rockets.png' %}" class='img-responsive img-rounded' />
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <div class="container" style="text-align: center;">
+
+Total number of your friends joined so far: {{ count }}<br>
+
+<div class="row">
+  <div class="col-sm-3">
+  <h3>5 Friends Joined</h3>
+    <div class="progress">
+  <div class="progress-bar progress-bar-info progress-bar-striped" id="count5" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+  0%
+  </div>
+</div>
+  <h4><b>Conversion Rookie</b></h4>
+  <i class="fa fa-rocket fa-2x"></i>&nbsp;
+  <i class="fa fa-rocket fa-2x"></i>
+  <hr/>
+  <span style="text-align: left;">
+  <h5>Reward Includes:</h5>
+    <ul>
+      <li>1 month FREE membership</li>
+      <li>Access to CRO experts community</li>
+      <br>
+      <br>
+    </ul>
+    </span>
+  <hr/>
+</div>
+  <div class="col-sm-3">
+  <h3>15 Friends Joined</h3>
+    <div class="progress">
+  <div class="progress-bar progress-bar-success progress-bar-striped" id="count15" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+  0%
+  </div>
+</div>
+    <h4>Conversion Ninja</h4>
+  <i class="fa fa-rocket fa-2x"></i>&nbsp;
+  <i class="fa fa-rocket fa-2x"></i>&nbsp;
+  <i class="fa fa-rocket fa-2x"></i>
+    <hr/>
+  <span style="text-align: left;">
+  <h5>Reward Includes:</h5>
+    <ul>
+      <li>3 month FREE membership</li>
+      <li>Access to CRO experts community</li>
+      <li>Learning support</li>
+      <br>
+    </ul>
+    </span>
+  <hr/>
+</div>
+  <div class="col-sm-3">
+  <h3>25 Friends Joined</h3>
+    <div class="progress">
+  <div class="progress-bar progress-bar-warning progress-bar-striped" id="count25" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+  0%
+  </div>
+</div>
+    <h4>Conversion Magician</h4>
+  <i class="fa fa-rocket fa-2x"></i>&nbsp;
+  <i class="fa fa-rocket fa-2x"></i>&nbsp;
+  <i class="fa fa-rocket fa-2x"></i>&nbsp;
+  <i class="fa fa-rocket fa-2x"></i>
+    <hr/>
+  <span style="text-align: left;">
+  <h5>Reward Includes:</h5>
+    <ul>      
+      <li>6 month FREE membership</li>
+      <li>Access to CRO experts community</li>
+      <li>Learning support</li>
+      <br>
+    </ul>
+    </span>
+    <hr/>
+</div>
+  <div class="col-sm-3">
+  <h3>50 Friends Joined</h3>
+    <div class="progress">
+  <div class="progress-bar progress-bar-danger progress-bar-striped" id="count50" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+  0%
+  </div>
+</div>
+    <h4>Conversion Legend</h4>
+  <i class="fa fa-rocket fa-2x"></i>&nbsp;
+  <i class="fa fa-rocket fa-2x"></i>&nbsp;
+  <i class="fa fa-rocket fa-2x"></i>&nbsp;
+  <i class="fa fa-rocket fa-2x"></i>&nbsp;
+  <i class="fa fa-rocket fa-2x"></i>
+    <hr/>
+   <span style="text-align: left;">
+  <h5>Rewards Include:</h5>
+    <ul>      
+      <li>6 month FREE membership</li>
+       <li>Access to CRO experts community</li>
+       <li>Learning support</li>
+       <li>Cheat sheet download</li>
+    </ul>
+    </span>
+    <hr/>
+</div>
+<br>
+<div class="row featured-row-top">
+<div class="col-sm-12">
+<h2>Benefits of Membership</h2><br><br>
+<div class="col-sm-3">
+    <center><img src="{% static 'img/sessions.png' %}" class='img-responsive img-rounded' /></center>
+    <h2>Live Sessions & Archives</h2>
+    <p class="lead">
+    Regular live training videos, AMA's and feedback sessions - with access to the full archive of past recordings.
+    </p>
+  </div>
+  <div class="col-sm-3">
+    <center><img src="{% static 'img/downloads.png' %}" class='img-responsive img-rounded' /></center>
+    <h2>Workbooks and Action Plans</h2>
+    <p class="lead">
+    Exercises, worksheets, checklists, forms and more to help you to really implement what you learn.
+    </p>
+  </div>
+  <div class="col-sm-3">
+    <center><img src="{% static 'img/community.png' %}" class='img-responsive img-rounded' /></center>
+    <h2>Be Part of Our Community</h2>
+    <p class="lead">
+    Ask questions, request feedback, get help with technical issues & discuss challenges, problems and successes.
+    </p>
+  </div>
+  <div class="col-sm-3">
+    <center><img src="{% static 'img/members.png' %}" class='img-responsive img-rounded' /></center>
+    <h2>Member-Only Resources</h2>
+    <p class="lead">
+    From exclusive freebies, handy tools and downloads, to member only perks, offers and discounts.
+    </p>
+  </div>
+</div>
+</div>
+</div>
+<hr>
+<!-- <a href="http://twitter.com/subscriptionfox">Terms & Conditions</a>&nbsp;&nbsp;<a href="http://facebook.com/subscriptionfox">Privacy Policy</a> --><br><br>Brought to you by <a href="http://crotricks.com">CROtricks.com</a><br><br>
+{% endblock %}

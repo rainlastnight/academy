@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block styles %}
+
+    <style>
+    body {
+	  border-top: 4px solid #18bc9c; 
+      background: url('{% static "img/sf_bg.png" %}') no-repeat center center fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+    }
+
+    </style>
+
+{% endblock %}
+
+{% block content %}
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron row" style="background-color: white;">
+      <div class="container">
+      <div class="col-sm-6">
+        <sub>(Beta)</sub><h1>CONVERSION ACADEMY</h1>
+        <p>Learn Conversion Optimization Techniques From World Class Growth Hackers Around The Globe!</p>
+        <p><a class="btn btn-default btn-block btn-lg" href="#signup" role="button">Be the first to know when we launch &raquo;</a></p>
+        </div>
+        <div class="col-sm-6">
+        <img src="{% static 'img/poly.png' %}" class='img-responsive' />
+        </div>
+      </div>
+    </div>
+    </div>
+	    <div class="container" style="text-align: center; color: white;" id="signup">
+	    <div class="col-sm-6 col-sm-offset-3">
+	    <i class="fa fa-paper-plane-o fa-5x"></i>
+		<h1>Become a Conversion Pro!</h1>
+	<form class="form-horizontal" method="POST" action=""> {% csrf_token %}
+	<div class="form-group form-group-lg">
+	{% if form.email.errors %}
+	{% for err in form.email.errors %} 
+	<div class="alert alert-warning" role="alert">Email is required!</div>
+	{% endfor %}
+	{% endif %}
+	<div class="input-group">
+	<input class="form-control" type="email" name="email" placeholder="Enter your email address to unlock growth" />
+	<span class="input-group-btn">
+	<input type='submit' value='Signup' class='btn btn-info btn-lg' />
+	</span>
+	</div>
+	</div>
+	</form>
+	<p>Signup while we are in beta <br>and earn rewards on the day we launch</p> 
+	</div>
+	</div>
+
+<div class="row featured-row-top">
+<div class="col-sm-12">
+<br><h1>What you will learn</h1><br>
+<div class="col-sm-3">
+		<i class="fa fa-hand-peace-o fa-5x"></i>
+		<h2>Case Studies</h2>
+		<p class="lead">
+		Case studies are a form of problem-based learning, where you present a situation that needs a resolution. We will teach you the best practices to avoid common mistakes and save money!
+		</p>
+	</div>
+	<div class="col-sm-3">
+		<i class="fa fa-hand-lizard-o fa-5x"></i>
+		<h2>Tracking Techniques</h2>
+		<p class="lead">
+		Learn to set up event tracking in Analytics through GTM snippets. Master virtual page views and take advantage of Event Tracking over Virtual pageviews to test implementations.
+		</p>
+	</div>
+	<div class="col-sm-3">
+		<i class="fa fa-hand-spock-o fa-5x"></i>
+		<h2>Data Manipulation</h2>
+		<p class="lead">
+		Earn critical skills to analyse and create actionable insight using data manipulation in Analytics. Utilize potential of data science and web personalization to help customer make quicker decisions.  
+		</p>
+	</div>
+	<div class="col-sm-3">
+		<i class="fa fa-hand-rock-o fa-5x"></i>
+		<h2>Growth Hacking</h2>
+		<p class="lead">
+		Growth and CRO must work hand-in-hand. Explore data-driven techiques to grow your user base and let us teach you the growth skills of the future.
+		</p>
+	</div>
+</div>
+</div>
+<a href="http://crotricks.com/?ref=CA">
+<div class="row featured-row-bottom">
+<center><img class="img-responsive" src="http://178.62.11.104/wp-content/uploads/2015/09/profilez.png" alt="CROtricks - Conversion Optimization Experts Community" /></center>
+<h1>Meet the CRO Experts Community </h1>
+<div class="col-sm-12">
+<p class="lead">Get advice, feedback, motivation and support from an active<br> community of fellow CRO students and experts who will keep you on track.</p><br><br>
+</div>
+</div>
+</a>
+{% endblock %}
