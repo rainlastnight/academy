@@ -4,6 +4,7 @@
 db.sqlite3
 sfox/db.sqlite3
 sfox/settings/local.py
+sfox/settings/base.py
 
 __pycache__/
 *.py[cod]
